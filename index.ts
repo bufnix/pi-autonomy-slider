@@ -25,26 +25,26 @@ interface AutonomyDefinition {
 const AUTONOMY_DEFINITIONS: Record<AutonomyLevel, AutonomyDefinition> = {
 	none: {
 		description: "Only explores, answers questions, and discusses",
-		icon: "󰡳",
+		icon: "󱚧",
 		themeColor: "thinkingMinimal",
 		prompt: "Don't make changes. Only explore, answer questions, and discuss.",
 	},
 	interactive: {
 		description: "Takes only the smallest requested step, then suggests follow-ups",
-		icon: "󰡵",
+		icon: "󱚟",
 		themeColor: "thinkingLow",
 		prompt:
 			"Do only the smallest step explicitly requested, then stop and ask before any follow-up work. If ambiguous, choose the least-damaging interpretation.",
 	},
 	default: {
 		description: "Uses default behavior and may take multiple obvious steps",
-		icon: "󰊚",
+		icon: "󰚩",
 		themeColor: "thinkingHigh",
 		prompt: "",
 	},
 	full: {
 		description: "Works fully autonomously until the task is complete",
-		icon: "󰡴",
+		icon: "󱚝",
 		themeColor: "thinkingMax",
 		prompt:
 			"Work autonomously in the isolated environment until the task is complete. Resolve ambiguities by testing alternatives and choosing the best; do not wait for confirmation. Finish with evidence of completion or why completion was impossible.",

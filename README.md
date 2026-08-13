@@ -2,10 +2,10 @@
 
 A [pi](https://pi.dev) extension with four autonomy guidance levels:
 
-- **󰡳 None** — explores and discusses without making changes
-- **󰡵 Interactive** — performs only the smallest requested step, then asks before follow-up work
-- **󰊚 Default** — normal agent behavior with no additional prompt
-- **󰡴 Full** — works autonomously through completion and provides evidence
+- **󱚧 None** — explores and discusses without making changes
+- **󱚟 Interactive** — performs only the smallest requested step, then asks before follow-up work
+- **󰚩 Default** — normal agent behavior with no additional prompt
+- **󱚝 Full** — works autonomously through completion and provides evidence
 
 Press **Ctrl+Shift+A** in pi to open the slider. Use **Left/Right** (or Tab), **Enter** to select, and **Esc** to cancel. Pressing **Ctrl+Shift+A** again while the slider is open advances to the next level.
 
