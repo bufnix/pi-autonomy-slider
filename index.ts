@@ -54,14 +54,8 @@ const AUTONOMY_DEFINITIONS: Record<AutonomyLevel, AutonomyDefinition> = {
 const DEFAULT_LEVEL: AutonomyLevel = "default";
 const STATE_ENTRY = "autonomy-level-state";
 const LEGACY_STATUS_ID = "autonomy-level";
-// Pi sorts extension footer statuses by key. Keep this last among normal keys.
-const STATUS_ID = "zz-autonomy-level";
+const AUTONOMY_SELECTION_EVENT = "bufnix:autonomy-level-selection";
 const AUTONOMY_SHORTCUT = Key.ctrlShift("a");
-
-function styleAutonomyIcon(theme: Theme, level: AutonomyLevel): string {
-	const definition = AUTONOMY_DEFINITIONS[level];
-	return theme.bold(theme.fg(definition.themeColor, definition.icon));
-}
 
 function normalizeAutonomyLevel(value: unknown): AutonomyLevel | undefined {
 	if (
@@ -275,8 +269,13 @@ export default function autonomySliderExtension(pi: ExtensionAPI): void {
 	let activeLevel: AutonomyLevel = DEFAULT_LEVEL;
 	let sliderOpen = false;
 
-	function updateStatus(ctx: ExtensionContext): void {
-		ctx.ui.setStatus(STATUS_ID, styleAutonomyIcon(ctx.ui.theme, activeLevel));
+	function emitSelection(): void {
+		const definition = AUTONOMY_DEFINITIONS[activeLevel];
+		pi.events.emit(AUTONOMY_SELECTION_EVENT, {
+			level: activeLevel,
+			icon: definition.icon,
+			themeColor: definition.themeColor,
+		});
 	}
 
 	function setLevel(
@@ -285,7 +284,7 @@ export default function autonomySliderExtension(pi: ExtensionAPI): void {
 		options: { persist?: boolean } = {},
 	): void {
 		activeLevel = level;
-		updateStatus(ctx);
+		emitSelection();
 
 		if (options.persist !== false) {
 			pi.appendEntry(STATE_ENTRY, { level });
@@ -386,6 +385,6 @@ export default function autonomySliderExtension(pi: ExtensionAPI): void {
 			break;
 		}
 
-		updateStatus(ctx);
+		emitSelection();
 	});
 }
